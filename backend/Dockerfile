@@ -1,17 +1,29 @@
+# ==========================================================
+# Build stage
+# ==========================================================
 FROM maven:3.9.9-eclipse-temurin-17 AS build
 
 WORKDIR /app
 
+# Copy Maven configuration
 COPY pom.xml .
+
+# Copy source code
 COPY src ./src
 
+# Build WAR file
 RUN mvn clean package -DskipTests
 
+
+# ==========================================================
+# Runtime stage
+# ==========================================================
 FROM eclipse-temurin:17-jre
 
 WORKDIR /app
 
-COPY --from=build /app/target/*.jar app.jar
+# Copy the generated WAR
+COPY --from=build /app/target/*.war app.war
 
-
-CMD ["java", "-jar", "app.jar"]
+# Start the Spring Boot WAR application
+CMD ["java", "-jar", "app.war"]

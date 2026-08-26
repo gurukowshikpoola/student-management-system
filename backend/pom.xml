@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0">
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -13,6 +17,10 @@
     <groupId>com.college</groupId>
     <artifactId>sms</artifactId>
     <version>1.0.0</version>
+
+    <!-- IMPORTANT: JSP applications are packaged as WAR -->
+    <packaging>war</packaging>
+
     <name>Student Management System</name>
 
     <properties>
@@ -45,11 +53,13 @@
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
 
+        <!-- JSTL API -->
         <dependency>
             <groupId>jakarta.servlet.jsp.jstl</groupId>
             <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
         </dependency>
 
+        <!-- JSTL Implementation -->
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
@@ -69,6 +79,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Embedded Tomcat -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -79,6 +96,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
                 <configuration>
                     <excludes>
                         <exclude>
@@ -87,6 +105,7 @@
                         </exclude>
                     </excludes>
                 </configuration>
+
             </plugin>
 
         </plugins>
